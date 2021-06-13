@@ -38,7 +38,7 @@ class AuthService
      * Check if user login credentials are correct
      *
      * @param array $login_credentials
-     * @return Object
+     * @return object
      */
     public function authenticateUser(array $login_credentials) {
 

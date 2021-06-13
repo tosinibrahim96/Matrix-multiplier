@@ -42,9 +42,9 @@ class AuthController extends Controller {
 
 
     /**
-     * Resgister a new user account
+     * Login with user credentials
      *
-     * @param  App\Http\Requests\RegisterUserRequest  $request
+     * @param  App\Http\Requests\UserLoginRequest  $request
      * @return Illuminate\Http\JsonResponse
      */
     public function login(UserLoginRequest $request)
@@ -59,7 +59,7 @@ class AuthController extends Controller {
 
 
     /**
-     * Update the specified resource in storage.
+     * Logout user by deleting tokens
      *
      * @param  \Illuminate\Http\Request  $request
      * @return Illuminate\Http\JsonResponse

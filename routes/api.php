@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\MatrixController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,14 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::prefix('v1')->group(function(){
+Route::prefix('v1')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
-
-
 });
 
 
-Route::prefix('v1')->middleware('auth:sanctum')->group(function(){
+Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
+    Route::post('matrix/multiply', [MatrixController::class, 'multiply']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });

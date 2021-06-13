@@ -1,62 +1,158 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Matrix multiplier API
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> Laravel application for Matrix multiplication. The app features a REST API with authentication.
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Clone
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Clone the repository using `git clone https://github.com/tosinibrahim96/Matrix-multiplier.git`
+- Create a `.env` file in the root folder and copy everything from `.env-sample` into it
+- Fill the `.env` values with your Database details as required
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+### Setup
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Download WAMP or XAMPP to manage APACHE, MYSQL and PhpMyAdmin. This also installs PHP by default. You can follow [this ](https://youtu.be/h6DEDm7C37A)tutorial
+- Download and install [composer ](https://getcomposer.org/)globally on your system
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+> install all project dependencies and generate application key
 
-## Laravel Sponsors
+```shell
+$ composer install
+$ php artisan key:generate
+```
+> migrate all tables and seed required data into the database
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```shell
+$ php artisan migrate:fresh --seed
+```
+> start your Apache server and MySQL on WAMP or XAMPP interface
+> serve your project using the default laravel PORT or manually specify a PORT
 
-### Premium Partners
+```shell
+$ php artisan serve (Default PORT)
+$ php artisan serve --port={PORT_NUMBER} (setting a PORT manually)
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
 
-## Contributing
+### Available Endpoints
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+<details><summary class="section-title">POST <code>/api/v1/register</code> -> Create a new account </summary>
 
-## Code of Conduct
+<div class="collapsable-details">
+<div class="json-object-array">
+	<pre>{
+Headers
+&nbsp; "Accept":"application/json",
+Body
+&nbsp; "name": Firstname Lastname,
+&nbsp; "email":"fnamelname@gmail.com",
+&nbsp; "password": "randompassword,
+&nbsp; "password_confirmation":"randompassword"
+}</pre>
+<pre>
+Sample response
+&nbsp; "status": 201,
+&nbsp; "data": {
+          "user": {
+            "id": 25,
+            "name": "Second account",
+            "email": "secondaccount@gmail.com",
+            "created_at": "2021-06-13T12:23:47.000000Z"
+          },
+          "token": "9|23AejhmabdkrAgTH5tEEJSzpF9zXnLrpmWeNtjbs"
+        },
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+&nbsp; "message": "Account Created Successfully."
+</pre>
+</div>
+</div>
+</details>
 
-## Security Vulnerabilities
+<details><summary class="section-title">POST <code>/api/v1/login</code> -> Login into created account </summary>
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+<div class="collapsable-details">
+<div class="json-object-array">
+	<pre>{
+Headers
+&nbsp; "Accept":"application/json",
+Body
+&nbsp; "email": "fnamelname@gmail.com",
+&nbsp; "password":"randompassword"
+}</pre>
+<pre>
+Sample response
+&nbsp; "status": 200,
+&nbsp; "data": {
+          "user": {
+            "id": 25,
+            "name": "Second account",
+            "email": "secondaccount@gmail.com",
+            "created_at": "2021-06-13T12:23:47.000000Z"
+          },
+          "token": "9|23AejhmabdkrAgTH5tEEJSzpF9zXnLrpmWeNtjbs"
+        },
 
-## License
+&nbsp; "message": "Login Successful."
+</pre>
+</div>
+</div>
+</details>
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<details><summary class="section-title">POST <code>/api/v1/logout</code> -> Logout of your account </summary>
+
+<div class="collapsable-details">
+<div class="json-object-array">
+	<pre>{
+Headers
+&nbsp; "Authorization":"Bearer $token",
+&nbsp; "Accept":"application/json",
+}</pre>
+<pre>
+Sample response
+&nbsp; "status": 200,
+&nbsp; "data":[],
+&nbsp; "message": "Logout Successful."
+</pre>
+</div>
+</div>
+</details>
+
+<details><summary class="section-title">POST <code>/api/v1/matrix/multiply</code> -> Multiply matrices and generate resulting matrix </summary>
+
+<div class="collapsable-details">
+<div class="json-object-array">
+	<pre>{
+Headers
+&nbsp; "Authorization":"Bearer $token",
+&nbsp; "Accept":"application/json",
+Body
+&nbsp; "matrix1_row_count":2,
+&nbsp; "matrix1_column_count":3,
+&nbsp; "matrix2_row_count":3,
+&nbsp; "matrix2_column_count":4,
+&nbsp; "matrix1_data":[1,1,1,2,2,2],
+&nbsp; "matrix2_data":[1,4,7,10,2,5,8,11,3,6,9,12]
+}</pre>
+<pre>
+Sample response
+&nbsp; "status": 200,
+&nbsp; "data": {
+          "matrix": [
+              ["F","O","X","AG"],
+              ["L","AD","AV","BN"]
+          ],
+          "rows_count": 2,
+          "columns_count": 4
+        },
+&nbsp; "message": "New Matrix Generated Successfully."
+</pre>
+</div>
+</div>
+</details>
+
+
+### License
+
+- **[MIT license](http://opensource.org/licenses/mit-license.php)**
+- Copyright 2020 © <a href="https://tosinibrahim96.github.io/Resume/" target="_blank">Ibrahim Alausa</a>.
